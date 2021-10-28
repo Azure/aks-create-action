@@ -1,5 +1,5 @@
 # action.yml
-name: 'AKS Create Action'
+name: 'Create AKS Action'
 description: 'Create an AKS Cluster'
 branding:
   icon: anchor
