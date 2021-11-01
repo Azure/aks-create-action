@@ -1,4 +1,4 @@
-This workflow can be used as an example for developers wanting to deploy Java apps using Github actions. For more details on Github Actions and workflows in general, see https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
+This workflow can be used as an example for developers wanting to deploy containerized apps using Github actions. For more details on Github Actions and workflows in general, see https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions
 
 # This workflow:
 This example workflow will:
@@ -25,7 +25,7 @@ as arguments like seen below:
 ```yaml
    steps:
     - uses: actions/checkout@v2
-    - uses: gambtho/aks_create_action@main
+    - uses: Azure/aks_create_action@main
     with:
       CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
       RESOURCE_GROUP_NAME: ${{ secrets.RESOURCE_GROUP_NAME }}
