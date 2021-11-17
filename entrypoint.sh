@@ -27,11 +27,11 @@ echo "*******************"
 # Using Pulumi
 if [ $INPUT_USE_PULUMI = "true"]; then
 
-/pulumi/bin/pulumi stack select dev --create
-/pulumi/bin/pulumi config set azure:clientId ${ARM_CLIENT_ID}
-/pulumi/bin/pulumi config set azure:clientSecret ${ARM_CLIENT_SECRET} --secret
-/pulumi/bin/pulumi config set azure:tenantId ${ARM_TENANT_ID}
-/pulumi/bin/pulumi config set azure:subscriptionId ${ARM_SUBSCRIPTION_ID}
+ pulumi stack select dev --create
+ pulumi config set azure:clientId ${ARM_CLIENT_ID}
+ pulumi config set azure:clientSecret ${ARM_CLIENT_SECRET} --secret
+ pulumi config set azure:tenantId ${ARM_TENANT_ID}
+ pulumi config set azure:subscriptionId ${ARM_SUBSCRIPTION_ID}
 
   if [ $INPUT_ACTION_TYPE = "destroy" ]; then
       echo "*******************"
@@ -42,7 +42,7 @@ if [ $INPUT_USE_PULUMI = "true"]; then
       echo "*******************"
       echo "Running apply"
       echo "*******************"
-      /pulumi/bin/pulumi up --yes
+      pulumi up --yes
   fi
 
   exit 1
