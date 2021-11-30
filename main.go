@@ -34,14 +34,6 @@ func main() {
 			return err
 		}
 
-		// Create ACR if needed
-		if isCreateACR() {
-			err = createACR(ctx, pulumi.String(location), pulumi.String(resourceGroup))
-			if err != nil {
-				fmt.Print("error happened during ACR creation")
-				return err
-			}
-		}
 
 		// Create K8's Cluster
 		k8sCluster, err := containerservice.NewKubernetesCluster(ctx, getClusterName(), &containerservice.KubernetesClusterArgs{
@@ -63,6 +55,16 @@ func main() {
 		if err != nil {
 			return err
 		}
+
+		// Create ACR if needed
+		if isCreateACR() {
+			err = createACR(ctx, pulumi.String(location), pulumi.String(resourceGroup), k8sCluster)
+			if err != nil {
+				fmt.Print("error happened during ACR creation")
+				return err
+			}
+		}
+
 
 
 		ctx.Export("clientCertificate", k8sCluster.KubeConfigs.ApplyT(func(kubeConfigs []containerservice.KubernetesClusterKubeConfig) (*string, error) {
@@ -143,12 +145,19 @@ func createStorageContainer(ctx *pulumi.Context, accountName pulumi.StringInput)
 }
 
 
-func createACR(ctx *pulumi.Context, location pulumi.StringInput, resourceGroup pulumi.StringInput) error {
+func createACR(ctx *pulumi.Context, location pulumi.StringInput, resourceGroup pulumi.StringInput, cluster *containerservice.KubernetesCluster) error {
+	// Attach the principle id to the newly create ACR below
+	registryIdentityArgs := containerservice.RegistryIdentityArgs{
+		PrincipalId: cluster.Identity.PrincipalId(),
+		TenantId:    cluster.Identity.TenantId(),
+	}
+
 	_, err := containerservice.NewRegistry(ctx, "akscreateacr", &containerservice.RegistryArgs{
 		ResourceGroupName: resourceGroup,
 		Location:          location,
 		Sku:               pulumi.String("Premium"),
 		AdminEnabled:      pulumi.Bool(false),
+		Identity: registryIdentityArgs,
 		Georeplications: containerservice.RegistryGeoreplicationArray{
 			&containerservice.RegistryGeoreplicationArgs{
 				Location:              pulumi.String("westeurope"),
