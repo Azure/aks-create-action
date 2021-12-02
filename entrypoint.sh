@@ -26,7 +26,7 @@ echo "*******************"
 
 # Using Pulumi
 if [ $INPUT_USE_PULUMI = "true"]; then
-
+ echo "Using Pulumi"
  pulumi stack select dev --create
  pulumi config set azure:clientId ${ARM_CLIENT_ID}
  pulumi config set azure:clientSecret ${ARM_CLIENT_SECRET} --secret
@@ -57,6 +57,7 @@ terraform init -backend-config="resource_group_name=${TF_VAR_resource_group_name
 
 if [ $INPUT_ACTION_TYPE = "destroy" ]; then
     echo "*******************"
+    echo "Using Terraform"
     echo "Running destroy"
     echo "*******************"
     terraform destroy -force
