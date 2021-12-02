@@ -25,7 +25,7 @@ echo "*******************"
 
 
 # Using Pulumi
-if [ $INPUT_USE_PULUMI = "true"]; then
+if [ $INPUT_USE_PULUMI = "true" ]; then
  echo "Using Pulumi"
  pulumi stack select dev --create
  pulumi config set azure:clientId ${ARM_CLIENT_ID}
@@ -49,6 +49,7 @@ if [ $INPUT_USE_PULUMI = "true"]; then
 fi
 
 # Using Terraform -  Default
+echo "Using Terraform"
 terraform init -backend-config="resource_group_name=${TF_VAR_resource_group_name}" \
 -backend-config="storage_account_name=${STORAGE_ACCOUNT_NAME}" \
 -backend-config="container_name=${STORAGE_CONTAINER_NAME}" \
@@ -57,7 +58,6 @@ terraform init -backend-config="resource_group_name=${TF_VAR_resource_group_name
 
 if [ $INPUT_ACTION_TYPE = "destroy" ]; then
     echo "*******************"
-    echo "Using Terraform"
     echo "Running destroy"
     echo "*******************"
     terraform destroy -force
