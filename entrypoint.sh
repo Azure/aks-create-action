@@ -17,7 +17,7 @@ export TF_VAR_create_acr=$INPUT_CREATE_ACR
 export TF_IN_AUTOMATION=true
 
 ## Use TF based on cluster size variable
-cd /action/$INPUT_CLUSTER_SIZE
+##cd /action/$INPUT_CLUSTER_SIZE
 
 echo "*******************"
 echo "Running init"
@@ -27,7 +27,7 @@ echo "*******************"
 # Using Pulumi
 if [ $INPUT_USE_PULUMI = "true" ]; then
  echo "Using Pulumi"
- pwd
+
  pulumi stack select dev --create
  pulumi config set azure:clientId ${ARM_CLIENT_ID}
  pulumi config set azure:clientSecret ${ARM_CLIENT_SECRET} --secret
