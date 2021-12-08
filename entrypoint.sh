@@ -25,7 +25,7 @@ echo "*******************"
 # Using Pulumi
 if [ $INPUT_USE_PULUMI = "true" ]; then
  echo "Using Pulumi"
- cd /action/
+ cd /github/home/
  /pulumi/bin/pulumi stack select dev --create
  /pulumi/bin/pulumi config set azure:clientId ${ARM_CLIENT_ID}
  /pulumi/bin/pulumi config set azure:clientSecret ${ARM_CLIENT_SECRET} --secret
