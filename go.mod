@@ -1,4 +1,4 @@
-module aks_create_action
+module aks-create-action
 
 go 1.14
 
