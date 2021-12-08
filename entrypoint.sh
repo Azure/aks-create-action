@@ -16,8 +16,6 @@ export TF_VAR_cluster_name=$INPUT_CLUSTER_NAME
 export TF_VAR_create_acr=$INPUT_CREATE_ACR
 export TF_IN_AUTOMATION=true
 
-## Use TF based on cluster size variable
-cd /action/$INPUT_CLUSTER_SIZE
 
 echo "*******************"
 echo "Running init"
@@ -51,6 +49,8 @@ fi
 
 # Using Terraform -  Default
 echo "Using Terraform"
+## Use TF based on cluster size variable
+cd /action/$INPUT_CLUSTER_SIZE
 terraform init -backend-config="resource_group_name=${TF_VAR_resource_group_name}" \
 -backend-config="storage_account_name=${STORAGE_ACCOUNT_NAME}" \
 -backend-config="container_name=${STORAGE_CONTAINER_NAME}" \
