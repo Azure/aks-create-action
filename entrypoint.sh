@@ -1,6 +1,6 @@
 #!/bin/sh -l
 
-# uncomment when image is in MCR . /root/.bashrc
+. /root/.bashrc
 
 export ARM_CLIENT_ID=$INPUT_ARM_CLIENT_ID
 export ARM_CLIENT_SECRET=$INPUT_ARM_CLIENT_SECRET
