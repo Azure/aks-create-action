@@ -27,6 +27,7 @@ echo "*******************"
 # Using Pulumi
 if [ $INPUT_USE_PULUMI = "true" ]; then
  echo "Using Pulumi"
+ pwd
  pulumi stack select dev --create
  pulumi config set azure:clientId ${ARM_CLIENT_ID}
  pulumi config set azure:clientSecret ${ARM_CLIENT_SECRET} --secret
