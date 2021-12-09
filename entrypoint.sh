@@ -21,12 +21,11 @@ echo "*******************"
 echo "Running init"
 echo "*******************"
 
+cd /action/$INPUT_CLUSTER_SIZE
 
 # Using Pulumi
 if [ $INPUT_USE_PULUMI = "true" ]; then
  echo "Using Pulumi"
- ## Use Pulumi based on cluster size variable
- cd /action/$INPUT_CLUSTER_SIZE
 
  /pulumi/bin/pulumi stack select dev --create
  /pulumi/bin/pulumi config set azure:clientId ${ARM_CLIENT_ID}
@@ -51,8 +50,6 @@ fi
 
 # Using Terraform -  Default
 echo "Using Terraform"
-## Use TF based on cluster size variable
-cd /action/$INPUT_CLUSTER_SIZE
 terraform init -backend-config="resource_group_name=${TF_VAR_resource_group_name}" \
 -backend-config="storage_account_name=${STORAGE_ACCOUNT_NAME}" \
 -backend-config="container_name=${STORAGE_CONTAINER_NAME}" \
