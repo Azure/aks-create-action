@@ -63,7 +63,7 @@ variable "cluster_name" {
 
 # add the role to the identity the kubernetes cluster was assigned
 resource "azurerm_role_assignment" "kubweb_to_acr" {
-  scope                = azurerm_container_registry.acr[count.index].acr.id
+  scope                = azurerm_container_registry.acr.acr.id
   role_definition_name = "AcrPull"
   principal_id         = azurerm_kubernetes_cluster.cluster.kubelet_identity[0].object_id
 }
