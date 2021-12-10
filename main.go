@@ -9,7 +9,7 @@ import (
 )
 
 const STORAGE_ACCOUNT_NAME = "akscreatesa"
-const CLUSTER_NAME = "akscreatemycluster"
+const CLUSTER_NAME = "akscreatecluster"
 const RESOURCE_GROUP_NAME = "akscreaterg"
 const CONTAINER_NAME = "akscreatecontainer"
 
