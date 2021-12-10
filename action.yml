@@ -42,7 +42,7 @@ inputs:
     default: 'create'
   USE_PULUMI:
     description: 'use pulumi instead of terraform'
-    required: true
+    required: false
     default: 'false'
   CREATE_ACR:
     description: 'create ACR with cluster name'
