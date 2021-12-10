@@ -5,9 +5,7 @@ terraform {
       version = "=2.66.0"
     }
   }
-  backend "azurerm" {
-    use_azuread_auth=true
-  }
+  backend "azurerm" {}
 }
 
 # Configure the Microsoft Azure Provider
