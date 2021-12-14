@@ -47,6 +47,10 @@ inputs:
   CREATE_ACR:
     description: 'create ACR with cluster name'
     default: 'false'
+  PULUMI_ACCESS_TOKEN:
+    description: 'create ACR with cluster name'
+    default: 'false'
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -64,3 +68,4 @@ runs:
     - ${{ inputs.ACTION_TYPE }}
     - ${{ inputs.CREATE_ACR }}
     - ${{ inputs.USE_PULUMI }}
+    - ${{ inputs.PULUMI_ACCESS_TOKEN }}
