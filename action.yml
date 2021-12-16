@@ -49,7 +49,7 @@ inputs:
     default: 'false'
   PULUMI_ACCESS_TOKEN:
     description: 'Token that allows this action to access Pulumi'
-    default: 'false'
+    required: 'false'
 
 runs:
   using: 'docker'
