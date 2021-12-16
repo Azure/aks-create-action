@@ -48,7 +48,7 @@ inputs:
     description: 'create ACR with cluster name'
     default: 'false'
   PULUMI_ACCESS_TOKEN:
-    description: 'create ACR with cluster name'
+    description: 'Token that allows this action to access Pulumi'
     default: 'false'
 
 runs:
