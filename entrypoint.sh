@@ -9,7 +9,7 @@ export ARM_TENANT_ID=$INPUT_ARM_TENANT_ID
 export STORAGE_ACCOUNT_NAME=$INPUT_STORAGE_ACCOUNT_NAME
 export STORAGE_CONTAINER_NAME=$INPUT_STORAGE_CONTAINER_NAME
 export STORAGE_ACCESS_KEY=$INPUT_STORAGE_ACCESS_KEY
-export USE_PULUMI=$INPUT_USE_PULUMI
+export IAC_TYPE=$INPUT_IAC_TYPE
 
 export TF_VAR_resource_group_name=$INPUT_RESOURCE_GROUP_NAME
 export TF_VAR_cluster_name=$INPUT_CLUSTER_NAME
@@ -24,7 +24,7 @@ echo "*******************"
 cd /action/$INPUT_CLUSTER_SIZE
 
 # Using Pulumi
-if [ $INPUT_USE_PULUMI = "true" ]; then
+if [ $INPUT_IAC_TYPE = "pulumi" ]; then
  echo "Using Pulumi"
 
  /pulumi/bin/pulumi stack select dev --create

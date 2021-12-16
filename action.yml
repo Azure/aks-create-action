@@ -40,10 +40,10 @@ inputs:
     description: 'create or destroy'
     required: false
     default: 'create'
-  USE_PULUMI:
-    description: 'use pulumi instead of terraform'
+  IAC_TYPE:
+    description: 'IAC tool, Possible choices: [ pulumi, terraform ]'
     required: false
-    default: 'false'
+    default: 'terraform'
   CREATE_ACR:
     description: 'create ACR with cluster name'
     default: 'false'
@@ -67,5 +67,5 @@ runs:
     - ${{ inputs.STORAGE_ACCESS_KEY }}
     - ${{ inputs.ACTION_TYPE }}
     - ${{ inputs.CREATE_ACR }}
-    - ${{ inputs.USE_PULUMI }}
+    - ${{ inputs.IAC_TYPE }}
     - ${{ inputs.PULUMI_ACCESS_TOKEN }}
