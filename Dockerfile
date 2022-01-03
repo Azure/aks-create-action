@@ -1,4 +1,4 @@
-FROM gambtho/azurecli_terraform:latest
+FROM mcr.microsoft.com/aks/github-actions/aks-create
 
 COPY . /action
 

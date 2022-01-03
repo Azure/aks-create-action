@@ -1,0 +1,3 @@
+name: aks-create-action
+runtime: go
+description: A minimal Azure Native Go Pulumi program
