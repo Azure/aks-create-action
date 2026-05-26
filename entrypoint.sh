@@ -16,15 +16,20 @@ export TF_VAR_cluster_name=$INPUT_CLUSTER_NAME
 export TF_VAR_create_acr=$INPUT_CREATE_ACR
 export TF_IN_AUTOMATION=true
 
+# Validate CLUSTER_SIZE to prevent path traversal
+case "$INPUT_CLUSTER_SIZE" in
+  dev|test) ;;
+  *) echo "ERROR: Invalid CLUSTER_SIZE '${INPUT_CLUSTER_SIZE}'. Must be 'dev' or 'test'." >&2; exit 1 ;;
+esac
 
 echo "*******************"
 echo "Running init"
 echo "*******************"
 
-cd /action/$INPUT_CLUSTER_SIZE
+cd /action/"$INPUT_CLUSTER_SIZE"
 
 # Using Pulumi
-if [ $INPUT_IAC_TYPE = "pulumi" ]; then
+if [ "$INPUT_IAC_TYPE" = "pulumi" ]; then
  echo "Using Pulumi"
 
  /pulumi/bin/pulumi stack select dev --create
@@ -33,7 +38,7 @@ if [ $INPUT_IAC_TYPE = "pulumi" ]; then
  /pulumi/bin/pulumi config set azure:tenantId ${ARM_TENANT_ID}
  /pulumi/bin/pulumi config set azure:subscriptionId ${ARM_SUBSCRIPTION_ID}
 
-  if [ $INPUT_ACTION_TYPE = "destroy" ]; then
+   if [ "$INPUT_ACTION_TYPE" = "destroy" ]; then
       echo "*******************"
       echo "Running destroy"
       echo "*******************"
@@ -56,7 +61,7 @@ terraform init -backend-config="resource_group_name=${TF_VAR_resource_group_name
 -backend-config="key=${TF_VAR_cluster_name}.tfstate" \
 -backend-config="access_key=${STORAGE_ACCESS_KEY}"
 
-if [ $INPUT_ACTION_TYPE = "destroy" ]; then
+if [ "$INPUT_ACTION_TYPE" = "destroy" ]; then
     echo "*******************"
     echo "Running destroy"
     echo "*******************"
