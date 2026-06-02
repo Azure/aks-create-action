@@ -36,11 +36,12 @@ echo "Region: $region";
 
 # Validate inputs to prevent injection via shell metacharacters
 name_pattern='^[A-Za-z0-9-]+$'
+rg_name_pattern='^[A-Za-z0-9]([A-Za-z0-9_-]*[A-Za-z0-9])?$'
 if ! [[ "$cluster_name" =~ $name_pattern ]]; then
   echo "ERROR: cluster_name must match $name_pattern" >&2; exit 1
 fi
-if ! [[ "$resource_group_name" =~ $name_pattern ]]; then
-  echo "ERROR: resource_group_name must match $name_pattern" >&2; exit 1
+if ! [[ "$resource_group_name" =~ $rg_name_pattern ]]; then
+  echo "ERROR: resource_group_name must match $rg_name_pattern" >&2; exit 1
 fi
 if ! [[ "$subscription" =~ ^[A-Za-z0-9-]+$ ]]; then
   echo "ERROR: subscription must match ^[A-Za-z0-9-]+$" >&2; exit 1
