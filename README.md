@@ -39,8 +39,23 @@ ARM_TENANT_ID: ******
 * `ARM_SUBSCRIPTION_ID` ***required***
 * `ARM_TENANT_ID` ***required***
 * `CLUSTER_SIZE` ***optional*** - dev (default) or test
-* `ACTION_TYPE` ***optional*** - create (default) or delete 
+* `ACTION_TYPE` ***optional*** - create (default) or destroy
+* `IAC_TYPE` ***optional*** - terraform (default) or pulumi
 * `CREATE_ACR` ***optional*** - true or false (default)
+
+`CLUSTER_SIZE`, `ACTION_TYPE`, and `IAC_TYPE` accept only the exact lowercase
+values listed above. Invalid values cause the action to fail before running
+Terraform or Pulumi.
+
+## Input trust
+
+This action runs Terraform or Pulumi with the supplied Azure credentials.
+Keep its inputs under trusted maintainer control; do not source them from
+untrusted pull request content, including PR files, titles, or bodies.
+In particular, `pull_request_target` workflows must not pass PR-controlled
+data to this action or execute code checked out from the PR head with secrets.
+Checking out PR files alone does not execute them, but passing their content
+to a privileged action can introduce an execution path.
 
 
 ## Example usage
