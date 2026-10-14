@@ -22,11 +22,21 @@ case "$INPUT_CLUSTER_SIZE" in
   *) echo "ERROR: Invalid CLUSTER_SIZE '${INPUT_CLUSTER_SIZE}'. Must be 'dev' or 'test'." >&2; exit 1 ;;
 esac
 
+case "$INPUT_ACTION_TYPE" in
+  create|destroy) ;;
+  *) echo "ERROR: Invalid ACTION_TYPE. Must be 'create' or 'destroy'." >&2; exit 1 ;;
+esac
+
+case "$INPUT_IAC_TYPE" in
+  terraform|pulumi) ;;
+  *) echo "ERROR: Invalid IAC_TYPE. Must be 'terraform' or 'pulumi'." >&2; exit 1 ;;
+esac
+
 echo "*******************"
 echo "Running init"
 echo "*******************"
 
-cd /action/"$INPUT_CLUSTER_SIZE"
+cd "/action/$INPUT_CLUSTER_SIZE" || exit 1
 
 # Using Pulumi
 if [ "$INPUT_IAC_TYPE" = "pulumi" ]; then
@@ -79,6 +89,5 @@ else
 
     terraform apply tfplan
 fi
-
 
 
